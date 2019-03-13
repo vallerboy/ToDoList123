@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDoList</title>
+</head>
+<body>
+<form action="/toDo" method="post">
+    <h1>To-Do-List:</h1>
+
+    Dodaj zadanie: <input type="text" name="name" required>
+    <br/><br/>
+
+    <input type="submit" value="Wyślij">
+</form>
+
+<div th:each="prod,iterStat : ${getList}">
+
+    <span th:text="${prod}"></span>
+
+
+    <a th:href="${'/delete/'+ iterStat.index }">Usuń</a>
+
+
+</div>
+
+</div>
+
+</body>
+</html>
