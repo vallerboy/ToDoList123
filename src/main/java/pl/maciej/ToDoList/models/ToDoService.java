@@ -8,13 +8,17 @@ import java.util.List;
 @Service
 public class ToDoService {
 
-    private List<String> list = new ArrayList<>();
+    private List<TaskEntity> list = new ArrayList<>();
 
-    public void addTask(String task){
-        list.add(task);
+    public void addTask(TaskForm task){
+        TaskEntity taskEntity = new TaskEntity();
+        taskEntity.setDeadline(task.getDeadline());
+        taskEntity.setMessage(task.getMessage());
+
+        list.add(taskEntity);
     }
 
-    public List<String> getAllContacts() {
+    public List<TaskEntity> getAllContacts() {
         return list;
     }
 }

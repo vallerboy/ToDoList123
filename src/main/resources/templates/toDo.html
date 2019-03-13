@@ -5,10 +5,11 @@
     <title>ToDoList</title>
 </head>
 <body>
-<form action="/toDo" method="post">
-    <h1>To-Do-List:</h1>
+<h1>To-Do-List:</h1>
 
-    Dodaj zadanie: <input type="text" name="name" required>
+<form action="/toDo" method="post" th:object="${taskForm}">
+    Dodaj zadanie: <input type="text" th:field="*{message}"  required> <br/>
+    Deadline: <input type="time" th:field="*{deadline}"  required>
     <br/><br/>
 
     <input type="submit" value="Wyślij">
@@ -16,10 +17,12 @@
 
 <div th:each="prod,iterStat : ${getList}">
 
-    <span th:text="${prod}"></span>
+    <span th:style="${prod.getDeadline().isBefore(#temporals.createNow()) ? 'color: red' : ''}"
+          th:text="${prod.getMessage()}"></span>
+    <strong th:text="${prod.getDeadline()}"></strong>
 
 
-    <a th:href="${'/delete/'+ iterStat.index }">Usuń</a>
+    <a th:href="${'/delete/' + iterStat.index }">Usuń</a>
 
 
 </div>
